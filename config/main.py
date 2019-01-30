@@ -715,6 +715,10 @@ def add_vlan_member(ctx, vid, interface_name, untagged):
         else:
             ctx.fail("{} is already a member of {}".format(interface_name,
                                                         vlan_name))
+
+    if interface_name_is_valid(interface_name) is False:
+        ctx.fail("Interface name is invalid. Please enter a valid interface name!!")
+
     members.append(interface_name)
     vlan['members'] = members
     db.set_entry('VLAN', vlan_name, vlan)
